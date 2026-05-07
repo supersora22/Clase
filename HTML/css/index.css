@@ -1,0 +1,76 @@
+/* --- Estilos base del carrusel --- */
+.carousel {
+  display: flex; /* Cambiamos columns por flex para mayor control */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  block-size: 300px;
+  
+  /* Esto activa las funciones experimentales en navegadores compatibles */
+  anchor-name: --carousel; 
+  scroll-marker-group: after;
+}
+
+.carousel__slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: 2rem;
+}
+
+/* --- Botones de Scroll (Solo CSS) --- */
+/* Nota: Estos selectores son experimentales (Draft Spec 2024/2025) */
+
+.carousel--scroll-buttons {
+  /* Genera botones automáticos basados en el scroll */
+  &::scroll-button(inline-start) {
+    content: '←';
+    position: fixed;
+    position-anchor: --carousel;
+    position-area: inline-start center;
+    padding: 10px;
+    background: #DEA740;
+    cursor: pointer;
+  }
+
+  &::scroll-button(inline-end) {
+    content: '→';
+    position: fixed;
+    position-anchor: --carousel;
+    position-area: inline-end center;
+    padding: 10px;
+    background: #DEA740;
+    cursor: pointer;
+  }
+}
+
+/* --- Marcadores (Puntos de abajo) --- */
+.carousel--scroll-markers::scroll-marker-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Importante: Cada slide necesita su propio marcador */
+.carousel__slide::scroll-marker {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 50%;
+}
+
+.carousel__slide::scroll-marker:target-current {
+  background: #29ef06;
+}
+.carousel__slide img {
+    width: 100%;       /* Ocupa todo el ancho del slide */
+    height: 100%;      /* Ocupa todo el alto del slide */
+    object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformarse */
+    display: block;    /* Quita espacios extra debajo de la imagen */
+}

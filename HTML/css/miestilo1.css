@@ -1,0 +1,26 @@
+body {
+    background-color: silver;
+    font-family: arial;
+    color: red;
+}
+
+p {
+    font-size: 12pt;
+    font-family: arial, helvetica;
+    font-weight: normal;
+}
+
+h1 {
+    font-size: 36pt;
+    font-family: verdana, arial;
+    text-decoration: underline;
+    text-align: center;
+    background-color: teal;
+}
+
+td {
+    font-size: 10pt;
+    font-family: verdana, arial;
+    text-align: center;
+    background-color: #666666;
+}

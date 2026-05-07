@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>WEB Jose - Carrusel Completo</title>
+    <meta name="author" content="Jose">
+    <style>
+@keyframes flujoColor {
+    0%   { background-color: #121212; } /* Slide 1 */
+    15%  { background-color: #1a1a2e; } /* Slide 2 */
+    30%  { background-color: #16213e; } /* Slide 3 */
+    45%  { background-color: #0f3460; } /* Slide 4 */
+    60%  { background-color: #1b1b1b; } /* Slide 5 */
+    75%  { background-color: #2c3e50; } /* Slide 6 */
+    90%  { background-color: #243447; } /* Slide 7 */
+    100% { background-color: #050505; } /* Slide 8 */
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    animation: flujoColor linear both;
+    animation-timeline: --carouselTimeline;
+    timeline-scope: --carouselTimeline; 
+    transition: background-color 1s ease;
+}
+   #menuhorizontal {
+    width: fit-content; 
+    margin: 0 auto 20px auto; 
+    padding: 5px 5px 10px 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+        #menuhorizontal a {
+            font-size: 20px;
+            padding: 5px 15px;
+            text-decoration: none;
+            color: black;
+            background: #DEA740;
+            border-radius: 5px 10px 5px 10px;
+        }
+        #menuhorizontal a:hover {
+            color: rgb(7, 101, 163);
+            background: #b87511;
+            border-bottom: 3px solid rgb(212, 129, 34);
+            border-top: 3px solid rgb(212, 129, 34);
+        }
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-timeline: --carouselTimeline x;
+    anchor-name: --carousel;
+    width: 800px;
+    height: 400px;
+    margin: 50px auto;
+    border: 2px solid #333;
+    border-radius: 15px;
+    position: relative;
+    z-index: 10;
+}
+        .carousel__slide {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel__slide img {
+            width: 100%;
+            height: 100%;
+        }
+        .carousel--scroll-buttons {
+            &::scroll-button(inline-start) {
+                content: 'Anterior';
+                font-size: 16px;
+                background: #DEA740;
+                color: black;
+                padding: 10px 15px;
+                border-radius: 20px;
+                cursor: pointer;
+                position: fixed;
+                position-anchor: --carousel;
+                position-area: inline-start center;
+            }
+            &::scroll-button(inline-end) {
+                content: 'Siguiente';
+                font-size: 16px;
+                background: #DEA740;
+                color: black;
+                padding: 10px 15px;
+                border-radius: 20px;
+                cursor: pointer;
+                position: fixed;
+                position-anchor: --carousel;
+                position-area: inline-end center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="menuhorizontal">
+        <a href="#slide-1" id="inicio">Inicio</a>
+        <a href="#slide-8">Final</a>
+    </nav>
+    <div class="carousel carousel--scroll-buttons carousel--scroll-markers">
+        <div class="carousel__slide" id="slide-1">
+            <img src="https://gaming-cdn.com/images/products/6023/orig/kingdom-hearts-iii-re-mind-dlc-pc-juego-steam-cover.jpg?v=1718354007" alt="Esto es un cartel promocional de Kingdom hearts 3" title="Esto es un cartel promocional de Kingdom hearts 3">
+        </div>
+        <div class="carousel__slide" id="slide-2">
+            <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2552430/ss_7fec87ad80856a7a3f4cf487cd70ce3a2ad8b280.1920x1080.jpg?t=1726050740" alt="Esto es una captura del primer juego de la saga." title="Esto es una captura del primer juego de la saga.">
+        </div>
+        <div class="carousel__slide" id="slide-3">
+            <img src="https://gh.cdn.sewest.net/assets/ident/news/c11eced5/KH_Series_Collection_1920x1080-o4uk3nt94.jpg?quality=65" alt="Cartel promocional de Kingdom hearts 2" title="Cartel promocional de Kingdom hearts 2">
+        </div>
+         <div class="carousel__slide" id="slide-4">
+            <img src="https://preview.redd.it/pq5benank3n11.jpg?auto=webp&s=182d64591cba1d467a6bafef85da81c2b2073f47" alt="Imagen tipo wallpaper de kingdom hearts 3" title="Imagen tipo wallpaper de kingdom hearts 3">
+        </div>
+         <div class="carousel__slide" id="slide-5">
+            <img src="https://i.redd.it/rh7kj3o2ulo81.png" alt="Imagen promocional de Kingdom hearts Union X" title="Imagen promocional de Kingdom hearts Union X">
+        </div>
+         <div class="carousel__slide" id="slide-6">
+            <img src="https://i.imgur.com/txGsr10.jpg" alt="Imagen tipo wallpaper de Kingdom hearts 358/2 Days" title="Imagen tipo wallpaper de Kingdom hearts 358/2 Days">
+        </div>
+         <div class="carousel__slide" id="slide-7">
+            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5298bac0-b8bf-4c80-af67-725c1272dbb0/db82utm-e69b22f5-6ade-4d5f-b9c5-78589fdf17b3.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi81Mjk4YmFjMC1iOGJmLTRjODAtYWY2Ny03MjVjMTI3MmRiYjAvZGI4MnV0bS1lNjliMjJmNS02YWRlLTRkNWYtYjljNS03ODU4OWZkZjE3YjMuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.lv7K5MKXif3VEoIpamar0BPpTsoj92GqKapuHZ6BvBk" alt="Imagen tipo wallpaper de toda la saga" title="Imagen tipo wallpaper de toda la saga">
+        </div>
+         <div class="carousel__slide" id="slide-8">
+            <img src="https://images8.alphacoders.com/134/thumb-1920-1345224.jpeg" alt="Imagen promocional de Kingdom hearts 1.5 remix" title="Imagen promocional de Kingdom hearts 1.5 remix">
+        </div>
+</body>
+</html>
