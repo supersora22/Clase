@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>WEB Jose</title>
+    <meta name="author" content="Jose"/>
+    <meta name="Index" content="Index"/>
+    <meta name="keywords" content="DAW, LM, HTML, Algeciras, Kursaal"/>
+    <link href="cuaderno/favicon.ico" rel="icon" type="images/ico"/>
+    <style>
+        body {
+            background-color: #40B7DE;
+            color: white;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        #menuhorizontal {
+            width: 1000px;
+            padding: 5px 5px 10px 10px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #menuhorizontal a {
+            font-size: 20px;
+            padding: 0px 10px 0px;
+            text-decoration: none;
+            color: black;
+            background: #DEA740;
+            border-radius: 5px 10px 5px 10px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        #menuhorizontal a:hover,
+        #menuhorizontal a:active {
+            color: rgb(7, 101, 163);
+            background: #b87511;
+            border-bottom: 3px solid rgb(212, 129, 34);
+            border-top: 3px solid rgb(212, 129, 34);
+        }
+
+        #menuhorizontal a:visited {
+            color: rgb(182, 11, 62);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            justify-content: right;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #DEA740;
+            color: black;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            border-radius: 5px 10px 5px 10px;
+            text-align: center;
+            left:0;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Este es mi menú desplegable</h2>
+    <p>Pon el ratón sobre el botón.</p>
+    <br/>
+
+    <div id="menuhorizontal">
+        <a href="crear.html">crear</a>
+        <a href="consulta.html">consulta</a>
+        <a href="actualizar.html">actualizar</a>
+        <a href="eliminar.html">eliminar</a>
+
+        <div class="dropdown">
+            <a href="#">Jose</a> <div class="dropdown-content">
+                Rodríguez
+            <div class="dropdown-content">
+              Vera
+            </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

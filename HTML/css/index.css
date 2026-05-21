@@ -1,76 +1,29 @@
-/* --- Estilos base del carrusel --- */
-.carousel {
-  display: flex; /* Cambiamos columns por flex para mayor control */
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  block-size: 300px;
-  
-  /* Esto activa las funciones experimentales en navegadores compatibles */
-  anchor-name: --carousel; 
-  scroll-marker-group: after;
-}
+       #menuhorizontal        {
+                            width: 1000px;
+                            padding: 5px 5px 10px 10px;
+                            }
 
-.carousel__slide {
-  flex: 0 0 100%;
-  scroll-snap-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  font-size: 2rem;
-}
+        #menuhorizontal a    {
+                            font-size: 20px;
+                            padding :0px 10px 0px;
+                            text-decoration: none;
+                            color: black;
+                            background: #DEA740;
+                            border-radius: 5px 10px 5px 10px;
+                            }
 
-/* --- Botones de Scroll (Solo CSS) --- */
-/* Nota: Estos selectores son experimentales (Draft Spec 2024/2025) */
+        #menuhorizontal a:hover,
 
-.carousel--scroll-buttons {
-  /* Genera botones automáticos basados en el scroll */
-  &::scroll-button(inline-start) {
-    content: '←';
-    position: fixed;
-    position-anchor: --carousel;
-    position-area: inline-start center;
-    padding: 10px;
-    background: #DEA740;
-    cursor: pointer;
-  }
+        #menuhorizontal :active        {
+                                    color: rgb(7, 101, 163);
+                                    background: #b87511;
+                                    border-bottom: 3px solid rgb(212, 129, 34);
+                                    border-top: 3px solid rgb(212, 129, 34);
+                                    }
 
-  &::scroll-button(inline-end) {
-    content: '→';
-    position: fixed;
-    position-anchor: --carousel;
-    position-area: inline-end center;
-    padding: 10px;
-    background: #DEA740;
-    cursor: pointer;
-  }
-}
-
-/* --- Marcadores (Puntos de abajo) --- */
-.carousel--scroll-markers::scroll-marker-group {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-/* Importante: Cada slide necesita su propio marcador */
-.carousel__slide::scroll-marker {
-  content: '';
-  width: 10px;
-  height: 10px;
-  background: #ccc;
-  border-radius: 50%;
-}
-
-.carousel__slide::scroll-marker:target-current {
-  background: #29ef06;
-}
-.carousel__slide img {
-    width: 100%;       /* Ocupa todo el ancho del slide */
-    height: 100%;      /* Ocupa todo el alto del slide */
-    object-fit: cover; /* Recorta la imagen para llenar el espacio sin deformarse */
-    display: block;    /* Quita espacios extra debajo de la imagen */
-}
+        #menuhorizontal a:visited     {
+                                    color: rgb(182, 11, 62);
+                                    }
+       #inicio        {
+                                    color: rgb(255, 255, 255);
+                                    }

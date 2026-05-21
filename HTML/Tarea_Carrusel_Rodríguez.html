@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>WEB Jose - Carrusel Completo</title>
-    <meta name="author" content="Jose">
+	 <meta name="author" content="Jose"/>
+	 <meta name="Index" content="carrusel"/>
+	 <meta name="keywords" content="DAW, LM, HTML, Algeciras, Kursaal"/>
+	 <link href="recursos/favicon.ico" rel="icon" type="images/ico"/>
     <style>
 @keyframes flujoColor {
     0%   { background-color: #121212; } /* Slide 1 */
@@ -24,26 +27,46 @@ body {
     transition: background-color 1s ease;
 }
    #menuhorizontal {
-    width: fit-content; 
-    margin: 0 auto 20px auto; 
-    padding: 5px 5px 10px 10px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-        #menuhorizontal a {
-            font-size: 20px;
-            padding: 5px 15px;
-            text-decoration: none;
-            color: black;
-            background: #DEA740;
-            border-radius: 5px 10px 5px 10px;
+            width: fit-content; 
+            margin: 0 auto 20px auto; 
+            padding: 5px 5px 10px 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+
+            flex-wrap: wrap;
         }
-        #menuhorizontal a:hover {
-            color: rgb(7, 101, 163);
-            background: #b87511;
-            border-bottom: 3px solid rgb(212, 129, 34);
-            border-top: 3px solid rgb(212, 129, 34);
+#menuhorizontal a {
+    font-size: clamp(16px, 2vw, 20px);
+
+    padding: 5px 15px;
+    text-decoration: none;
+    color: black;
+    background: #DEA740;
+    border-radius: 5px 10px 5px 10px;
+
+    filter: drop-shadow(5px 5px 5px rgba(255, 0, 0, 0.3));
+}
+#menuhorizontal a:hover {
+    color: rgb(7, 101, 163);
+    background: #b87511;
+    border-bottom: 3px solid rgb(212, 129, 34);
+    border-top: 3px solid rgb(212, 129, 34);
+
+    filter: drop-shadow(7px 7px 7px rgba(0, 255, 38, 0.5));/* al pasarle el raton cambia a verde */
+}
+.texto-centrado {
+            text-align: center;
+            color: white; 
+            width: 90%;
+            max-width: 800px; 
+            margin: 0 auto 30px auto; 
+            font-size: 18px;
+
+            font-size: clamp(16px, 2.5vw, 24px);
+            
+            line-height: 1.6;
+            padding: 0 15px; 
         }
 .carousel {
     display: flex;
@@ -52,6 +75,13 @@ body {
     scroll-behavior: smooth;
     scroll-timeline: --carouselTimeline x;
     anchor-name: --carousel;
+
+    width: 85vw;
+    max-width: 800px;
+    aspect-ratio: 16 / 9;
+    max-height: 400px;
+
+
     width: 800px;
     height: 400px;
     margin: 50px auto;
@@ -72,33 +102,57 @@ body {
         .carousel__slide img {
             width: 100%;
             height: 100%;
+            object-fit: cover;  
         }
-        .carousel--scroll-buttons {
-            &::scroll-button(inline-start) {
-                content: 'Anterior';
-                font-size: 16px;
-                background: #DEA740;
-                color: black;
-                padding: 10px 15px;
-                border-radius: 20px;
-                cursor: pointer;
-                position: fixed;
-                position-anchor: --carousel;
-                position-area: inline-start center;
+.carousel--scroll-buttons {
+    &::scroll-button(inline-start) {
+        content: 'Anterior';
+
+        font-size: clamp(12px, 1.5vw, 16px);
+
+        font-size: 16px;
+        background: #DEA740;
+        color: black;
+        padding: 10px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        position: fixed;
+        position-anchor: --carousel;
+        position-area: inline-start center;
+
+        filter: drop-shadow(5px 5px 5px rgba(255, 0, 0, 0.3));
+        z-index: 100;
+    }
+           &::scroll-button(inline-end) {
+        content: 'Siguiente';
+
+        font-size: clamp(12px, 1.5vw, 16px);
+
+        font-size: 16px;
+        background: #DEA740;
+        color: black;
+        padding: 10px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        position: fixed;
+        position-anchor: --carousel;
+        position-area: inline-end center;
+        
+        filter: drop-shadow(5px 5px 5px rgba(255, 0, 0, 0.3));
+        z-index: 100;
+    }
+    @media (max-width: 600px) {
+            .carousel {
+                width: 95vw;
+                aspect-ratio: 4 / 3;
             }
-            &::scroll-button(inline-end) {
-                content: 'Siguiente';
-                font-size: 16px;
-                background: #DEA740;
-                color: black;
-                padding: 10px 15px;
-                border-radius: 20px;
-                cursor: pointer;
-                position: fixed;
-                position-anchor: --carousel;
-                position-area: inline-end center;
+            .carousel--scroll-buttons {
+                &::scroll-button(inline-start), &::scroll-button(inline-end) {
+                    margin: 0 10px;
+                }
             }
         }
+}
     </style>
 </head>
 <body>
@@ -106,6 +160,11 @@ body {
         <a href="#slide-1" id="inicio">Inicio</a>
         <a href="#slide-8">Final</a>
     </nav>
+        <p class="texto-centrado">
+       Kingdom Hearts es una serie de videojuegos, perteneciente al género de juegos de rol de acción, desarrollado y publicado por Square Enix.
+Surge de la colaboración de Square Enix y The Walt Disney Company, bajo la dirección de Tetsuya Nomura, diseñador de larga trayectoria en Square Enix. Kingdom Hearts es un crossover de varias producciones de Disney y otros títulos de Square Enix como la serie Final Fantasy, pero siendo adaptados al universo del juego, interactuando unos con otros y con los personajes originales de los juegos. La serie se centra en el viaje del personaje principal, Sora, en el cual recorre varios mundos ya sean originales del juego o basados en escenarios de películas de Disney.
+La mayoría de los juegos han sido bien recibidos por la crítica y han tenido un gran éxito comercial, aunque cada título ha tenido diferentes niveles de éxito. En septiembre de 2008, la serie Kingdom Hearts ya había vendido más de 12 millones de copias en todo el mundo, con 2 millones de copias en las regiones PAL, 3 millones de copias en Japón, y 5,6 millones de copias en Norteamérica.
+    </p>
     <div class="carousel carousel--scroll-buttons carousel--scroll-markers">
         <div class="carousel__slide" id="slide-1">
             <img src="https://gaming-cdn.com/images/products/6023/orig/kingdom-hearts-iii-re-mind-dlc-pc-juego-steam-cover.jpg?v=1718354007" alt="Esto es un cartel promocional de Kingdom hearts 3" title="Esto es un cartel promocional de Kingdom hearts 3">
