@@ -1,0 +1,25 @@
+CREATE DATABASE Ejercicio_2;
+USE Ejercicio_2;
+CREATE TABLE LIBRO (
+    ISBN INT,
+    titulo VARCHAR(30) NOT NULL,
+    autor VARCHAR(50),
+    anoP YEAR,
+    categoria VARCHAR(30) NOT NULL,
+    PRIMARY KEY (ISBN)
+);
+CREATE TABLE USUARIO (
+    DNI VARCHAR(9),
+    nombre VARCHAR(50),
+    telefono INT,
+    direccion VARCHAR(100),
+    PRIMARY KEY (DNI)
+);
+CREATE TABLE PRESTAMO (
+    idPrestamo INT AUTO_INCREMENT,
+    DNI VARCHAR(9),
+    ISBN INT,
+    PRIMARY KEY (idPrestamo),
+    FOREIGN KEY (DNI) REFERENCES USUARIO(DNI),
+    FOREIGN KEY (ISBN) REFERENCES LIBRO(ISBN)
+);
