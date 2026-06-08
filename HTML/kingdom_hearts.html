@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <title>Kingdom Hearts - Noticias</title>
+    <meta name="keywords" content="kingdom hearts, square enix, disney, videojuegos, RPG, noticias" />
+    <meta name="author" content="Jose A. Rodríguez Vera" />
+    <meta name="description" content="Noticias y contenido sobre la saga Kingdom Hearts" />
+    <link href="recursos/favicon.ico" rel="icon" type="images/ico"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #DEA740;
+            --gold-dark: #b87511;
+            --dark-bg: #0a0a14;
+            --panel-bg: #0f0f1e;
+            --sidebar-bg: #12122a;
+            --text: #c8c8e0;
+            --heading: #e8d8a0;
+            --accent: #4a8fff;
+            --glow: rgba(74, 143, 255, 0.4);
+            --border: rgba(222, 167, 64, 0.3);
+        }
+
+        /* Reset global básico */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        /* Animación del fondo vinculada al scroll del carrusel */
+        @keyframes flujoColor {
+            0%   { background-color: #121212; }
+            15%  { background-color: #1a1a2e; }
+            30%  { background-color: #16213e; }
+            45%  { background-color: #0f3460; }
+            60%  { background-color: #1b1b1b; }
+            75%  { background-color: #2c3e50; }
+            90%  { background-color: #243447; }
+            100% { background-color: #050505; }
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            animation: flujoColor linear both;
+            animation-timeline: --carouselTimeline;
+            timeline-scope: --carouselTimeline; 
+            font-family: 'Crimson Text', Georgia, serif;
+            color: var(--text);
+            min-height: 100vh;
+            transition: background-color 1s ease;
+        }
+
+        /* Contenedor principal adaptable */
+        #contenido {
+            width: 100%;
+            max-width: 860px;
+            margin: 0 auto;
+            font-size: 15px;
+        }
+
+        /* Cabecera / Header */
+        #logo {
+            background: linear-gradient(135deg, #050510 0%, #1a1a3e 50%, #050510 100%);
+            border-bottom: 2px solid var(--gold);
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #logo::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://i.imgur.com/txGsr10.jpg') center/cover no-repeat;
+            opacity: 0.15;
+            filter: blur(2px);
+        }
+        #logo h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8em, 5vw, 2.4em);
+            font-weight: 900;
+            color: var(--gold);
+            text-align: center;
+            padding: 22px 20px 10px;
+            position: relative;
+            text-shadow: 0 0 30px rgba(222,167,64,0.6), 0 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 4px;
+        }
+        #logo .subtitulo {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(0.65em, 2vw, 0.78em);
+            color: var(--accent);
+            text-align: center;
+            letter-spacing: 8px;
+            padding-bottom: 16px;
+            position: relative;
+            text-transform: uppercase;
+        }
+
+        /* Menú de navegación principal */
+        #nav-bar {
+            background: linear-gradient(90deg, #0a0a1a, #1a1a3a, #0a0a1a);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 10px;
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+        #nav-bar a, .dropdown > a {
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            padding: 6px 14px;
+            text-decoration: none;
+            color: #000;
+            background: var(--gold);
+            border-radius: 5px 10px 5px 10px;
+            display: inline-block;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+            filter: drop-shadow(2px 2px 4px rgba(255,100,0,0.2));
+        }
+        #nav-bar a:hover, .dropdown > a:hover {
+            color: rgb(7, 101, 163);
+            background: var(--gold-dark);
+            border-bottom: 2px solid rgb(212, 129, 34);
+            border-top: 2px solid rgb(212, 129, 34);
+            filter: drop-shadow(3px 3px 6px rgba(0,200,100,0.4));
+        }
+        #nav-bar a:visited {
+            color: rgb(100, 0, 50);
+        }
+
+        /* Menus desplegables */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #1a1a3a;
+            border: 1px solid var(--border);
+            border-radius: 4px 10px 10px 10px;
+            min-width: 180px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6), 0 0 10px var(--glow);
+            z-index: 999;
+            overflow: hidden;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 9px 16px;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            color: var(--gold) !important;
+            background: transparent !important;
+            border-radius: 0 !important;
+            border: none !important;
+            filter: none !important;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(222,167,64,0.1) !important;
+            letter-spacing: 0.3px;
+            transition: background 0.15s, color 0.15s;
+        }
+        .dropdown-content a:last-child { border-bottom: none !important; }
+        .dropdown-content a:hover {
+            background: rgba(222, 167, 64, 0.12) !important;
+            color: #fff !important;
+            padding-left: 22px;
+        }
+        .dropdown:hover .dropdown-content { 
+            display: block; 
+        }
+
+        /* Estructura de bloques */
+        #layout {
+            display: flex;
+            min-height: 600px;
+        }
+
+        /* Barra lateral (Sidebar) */
+        #secundario {
+            width: 210px;
+            min-width: 210px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid var(--border);
+            padding: 18px 12px;
+        }
+        #secundario h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+        #secundario ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        #secundario ul li {
+            background: rgba(255,255,255,0.03);
+            margin-bottom: 4px;
+            padding: 6px 8px 6px 14px;
+            border-left: 2px solid rgba(222,167,64,0.3);
+            transition: all 0.2s;
+        }
+        #secundario ul li:hover {
+            background: rgba(222,167,64,0.1);
+            border-left-color: var(--gold);
+        }
+        #secundario ul li a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 13px;
+            font-family: 'Crimson Text', serif;
+            transition: color 0.2s;
+        }
+        #secundario ul li:hover a { color: var(--gold); }
+
+        .ficha {
+            background: rgba(74, 143, 255, 0.05);
+            border: 1px solid rgba(74,143,255,0.2);
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 12.5px;
+            line-height: 1.7;
+        }
+        .ficha strong {
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        .ficha p { margin-bottom: 6px; }
+
+        /* Contenido de texto central */
+        #principal {
+            flex: 1;
+            background: var(--panel-bg);
+            padding: 20px 22px;
+            text-align: justify;
+            line-height: 1.75;
+        }
+        #principal h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.5em;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+            letter-spacing: 2px;
+        }
+        #principal h3 {
+            font-family: 'Cinzel', serif;
+            color: var(--heading);
+            font-size: 1.1em;
+            margin: 22px 0 8px;
+            padding: 6px 10px;
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid var(--gold);
+        }
+        #principal p {
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+        #principal img {
+            float: right;
+            width: 42%;
+            margin: 0 0 14px 18px;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 12px var(--glow);
+        }
+
+        /* Sección Multimedia */
+        #seccion-carrusel {
+            background: var(--panel-bg);
+            padding: 30px 22px;
+            border-top: 1px solid var(--border);
+        }
+        #seccion-carrusel h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.4em;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        /* Configuración del carrusel original */
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            scroll-timeline: --carouselTimeline x;
+            anchor-name: --carousel;
+            width: 100%;
+            max-width: 800px;
+            height: 400px;
+            margin: 20px auto;
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 0 30px rgba(74,143,255,0.2);
+        }
+        .carousel__slide {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel__slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;  
+            transition: transform 0.4s;
+        }
+        .carousel__slide img:hover { 
+            transform: scale(1.03); 
+        }
+
+        /* Botones de navegación avanzados (CSS Puro) */
+        .carousel--scroll-buttons {
+            &::scroll-button(inline-start) {
+                content: '◀ Anterior';
+                font-family: 'Cinzel', serif;
+                font-size: 14px;
+                background: var(--gold);
+                color: black;
+                padding: 10px 15px;
+                border-radius: 20px;
+                cursor: pointer;
+                position: fixed;
+                position-anchor: --carousel;
+                position-area: inline-start center;
+                filter: drop-shadow(5px 5px 5px rgba(255, 0, 0, 0.3));
+                z-index: 100;
+                margin-left: -20px;
+                transition: background 0.2s;
+            }
+            &::scroll-button(inline-start):hover {
+                background: var(--gold-dark);
+            }
+            &::scroll-button(inline-end) {
+                content: 'Siguiente ▶';
+                font-family: 'Cinzel', serif;
+                font-size: 14px;
+                background: var(--gold);
+                color: black;
+                padding: 10px 15px;
+                border-radius: 20px;
+                cursor: pointer;
+                position: fixed;
+                position-anchor: --carousel;
+                position-area: inline-end center;
+                filter: drop-shadow(5px 5px 5px rgba(255, 0, 0, 0.3));
+                z-index: 100;
+                margin-right: -20px;
+                transition: background 0.2s;
+            }
+            &::scroll-button(inline-end):hover {
+                background: var(--gold-dark);
+            }
+        }
+
+        /* Malla de tarjetas de juegos */
+        #seccion-juegos {
+            background: var(--panel-bg);
+            padding: 30px 22px;
+            border-top: 1px solid var(--border);
+        }
+        #seccion-juegos h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 8px;
+        }
+        .juegos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+        .juego-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px;
+            transition: all 0.25s;
+        }
+        .juego-card:hover {
+            background: rgba(222,167,64,0.06);
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+        .juego-card h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 12px;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        .juego-card p {
+            font-size: 12.5px;
+            color: rgba(200,200,224,0.75);
+            line-height: 1.5;
+            margin: 0;
+        }
+        .juego-card .anio {
+            display: inline-block;
+            background: rgba(74,143,255,0.15);
+            color: var(--accent);
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Pie de página */
+        #pie {
+            background: linear-gradient(90deg, #050510, #0f0f22, #050510);
+            border-top: 2px solid var(--gold);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        #pie a {
+            text-decoration: none;
+            color: var(--gold);
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        #pie a:hover {
+            background: rgba(222,167,64,0.15);
+        }
+        .pie-sep { color: rgba(222,167,64,0.3); margin: 0 4px; }
+        .realizado {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            color: rgba(200,200,224,0.5);
+        }
+
+        html { scroll-behavior: smooth; }
+        .anchor { display: block; height: 0; }
+
+        /* ─── MEDIA QUERY PARA RESPONSIVE TRADICIONAL ─── */
+        @media (max-width: 768px) {
+            #layout {
+                flex-direction: column; /* Apila el sidebar arriba o abajo según convenga */
+            }
+            #secundario {
+                width: 100%;
+                min-width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+            }
+            #principal img {
+                float: none;
+                width: 100%;
+                margin: 0 0 15px 0;
+            }
+            .juegos-grid {
+                grid-template-columns: repeat(2, 1fr); /* Pasa a 2 columnas en tablets */
+            }
+            .carousel {
+                height: 300px; /* Reducimos el alto en pantallas pequeñas */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .juegos-grid {
+                grid-template-columns: 1fr; /* 1 columna fija en móviles */
+            }
+            .carousel {
+                height: 220px;
+            }
+            #pie {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="contenido">
+
+    <div id="logo">
+        <h1>⚔ KINGDOM HEARTS</h1>
+        <p class="subtitulo">Portal de noticias y guías</p>
+    </div>
+
+    <nav id="nav-bar">
+        <a href="#inicio">Inicio</a>
+        <div class="dropdown">
+            <a href="#">La Saga ▾</a>
+            <div class="dropdown-content">
+                <a href="#historia">Historia y Argumento</a>
+                <a href="#personajes">Personajes Principales</a>
+                <a href="#mundos">Los Mundos</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#">Juegos ▾</a>
+            <div class="dropdown-content">
+                <a href="#seccion-juegos">Todos los Títulos</a>
+                <a href="#seccion-juegos">KH1 (2002)</a>
+                <a href="#seccion-juegos">KH2 (2005)</a>
+                <a href="#seccion-juegos">KH3 (2019)</a>
+            </div>
+        </div>
+        <a href="#seccion-carrusel">Galería</a>
+        <div class="dropdown">
+            <a href="#">Enlaces ▾</a>
+            <div class="dropdown-content">
+                <a href="https://www.square-enix-games.com/" target="_blank">Square Enix</a>
+                <a href="https://www.disney.es/" target="_blank">Disney España</a>
+                <a href="https://www.square-enix.com/kingdomhearts/home/es/" target="_blank">Web Oficial KH</a>
+            </div>
+        </div>
+    </nav>
+
+    <div id="layout">
+        <div id="secundario">
+            <h3>Secciones</h3>
+            <ul>
+                <li><a href="#inicio">📋 Introducción</a></li>
+                <li><a href="#historia">📖 Historia</a></li>
+                <li><a href="#personajes">👤 Personajes</a></li>
+                <li><a href="#mundos">🌍 Los Mundos</a></li>
+                <li><a href="#seccion-juegos">🎮 Juegos</a></li>
+                <li><a href="#seccion-carrusel">🖼 Galería</a></li>
+            </ul>
+            <h3>Ficha Técnica</h3>
+            <div class="ficha">
+                <p><strong>Género</strong><br>RPG de Acción</p>
+                <p><strong>Desarrolladora</strong><br>Square Enix</p>
+                <p><strong>Colaboración</strong><br>The Walt Disney Co.</p>
+                <p><strong>Director</strong><br>Tetsuya Nomura</p>
+                <p><strong>Primer juego</strong><br>2002 (PS2)</p>
+                <p><strong>Plataformas</strong><br>PS2, PS3, PS4, PS5, PC, Switch</p>
+            </div>
+        </div>
+
+        <div id="principal">
+            <span class="anchor" id="inicio"></span>
+            <h2>BIENVENIDO AL PORTAL</h2>
+            <p>
+                <strong style="color:var(--gold)">Kingdom Hearts</strong> es una de las sagas de videojuegos más queridas e icónicas de la historia. Desarrollada y publicada por Square Enix desde 2002, nació de la colaboración entre Tetsuya Nomura y The Walt Disney Company, fusionando el universo de Disney con el estilo JRPG característico de la compañía japonesa.
+            </p>
+            <p>
+                En este portal encontrarás noticias, análisis de los juegos de la saga, información sobre personajes, mundos y mucho más.
+            </p>
+
+            <span class="anchor" id="historia"></span>
+            <h3>Historia y Argumento</h3>
+            <img src="https://gaming-cdn.com/images/products/6023/orig/kingdom-hearts-iii-re-mind-dlc-pc-juego-steam-cover.jpg?v=1718354007" alt="Kingdom Hearts III" title="Kingdom Hearts III">
+            <p>
+                La saga sigue al joven <em>Sora</em>, quien junto a sus amigos Donald y Goofy recorre distintos mundos basados en películas de Disney para combatir las fuerzas de la Oscuridad. La narrativa central gira en torno al conflicto eterno entre la Luz y la Oscuridad, y a la búsqueda del verdadero significado del Corazón.
+            </p>
+            <p>
+                El arco argumental principal abarca tres grandes entregas numeradas —KH1, KH2 y KH3— además de numerosos títulos secundarios que profundizan en el lore de la saga, muchos de ellos considerados indispensables para comprender la historia completa.
+            </p>
+
+            <span class="anchor" id="personajes"></span>
+            <h3>Personajes Principales</h3>
+            <p>
+                <strong style="color:var(--gold)">Sora</strong> es el protagonista indiscutible: un chico alegre y valiente cuyo enorme corazón le permite empuñar la Keyblade, el arma mágica símbolo de toda la saga. Le acompañan <strong style="color:var(--gold)">Riku</strong>, su mejor amigo que cayó en la oscuridad y luchó por redimirse, y <strong style="color:var(--gold)">Kairi</strong>, la portadora de una de las siete Princesas del Corazón Puro.
+            </p>
+            <p>
+                Como antagonista principal actúa <strong style="color:var(--gold)">Xehanort</strong>, un maestro de la Keyblade obsesionado con desentrañar el misterio del <em>χ-blade</em> y desencadenar la Keyblade War. Su legado y múltiples encarnaciones vertebran la práctica totalidad del arco argumental.
+            </p>
+
+            <span class="anchor" id="mundos"></span>
+            <h3>Los Mundos</h3>
+            <p>
+                Cada entrega traslada a Sora a mundos únicos inspirados en clásicos de Disney: desde <em>Agrabah</em> (Aladdin) y <em>Atlantica</em> (La Sirenita), hasta <em>Twilight Town</em>, un escenario completamente original de la saga. Kingdom Hearts III introdujo mundos como <em>San Frantokyo</em> (Big Hero 6) o <em>Arendelle</em> (Frozen), ampliando notablemente el universo.
+            </p>
+        </div>
+    </div>
+
+    <div id="seccion-carrusel">
+        <h2>GALERÍA DE IMÁGENES</h2>
+        <div class="carousel carousel--scroll-buttons carousel--scroll-markers">
+            <div class="carousel__slide" id="slide-1">
+                <img src="https://gaming-cdn.com/images/products/6023/orig/kingdom-hearts-iii-re-mind-dlc-pc-juego-steam-cover.jpg?v=1718354007" alt="Esto es un cartel promocional de Kingdom hearts 3" title="Esto es un cartel promocional de Kingdom hearts 3">
+            </div>
+            <div class="carousel__slide" id="slide-2">
+                <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2552430/ss_7fec87ad80856a7a3f4cf487cd70ce3a2ad8b280.1920x1080.jpg?t=1726050740" alt="Esto es una captura del primer juego de la saga." title="Esto es una captura del primer juego de la saga.">
+            </div>
+            <div class="carousel__slide" id="slide-3">
+                <img src="https://gh.cdn.sewest.net/assets/ident/news/c11eced5/KH_Series_Collection_1920x1080-o4uk3nt94.jpg?quality=65" alt="Cartel promocional de Kingdom hearts 2" title="Cartel promocional de Kingdom hearts 2">
+            </div>
+            <div class="carousel__slide" id="slide-4">
+                <img src="https://preview.redd.it/pq5benank3n11.jpg?auto=webp&s=182d64591cba1d467a6bafef85da81c2b2073f47" alt="Imagen tipo wallpaper de kingdom hearts 3" title="Imagen tipo wallpaper de kingdom hearts 3">
+            </div>
+            <div class="carousel__slide" id="slide-5">
+                <img src="https://i.redd.it/rh7kj3o2ulo81.png" alt="Imagen promocional de Kingdom hearts Union X" title="Imagen promocional de Kingdom hearts Union X">
+            </div>
+            <div class="carousel__slide" id="slide-6">
+                <img src="https://i.imgur.com/txGsr10.jpg" alt="Imagen tipo wallpaper de Kingdom hearts 358/2 Days" title="Imagen tipo wallpaper de Kingdom hearts 358/2 Days">
+            </div>
+            <div class="carousel__slide" id="slide-7">
+                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5298bac0-b8bf-4c80-af67-725c1272dbb0/db82utm-e69b22f5-6ade-4d5f-b9c5-78589fdf17b3.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi81Mjk4YmFjMC1iOGJmLTRjODAtYWY2Ny03MjVjMTI3MmRiYjAvZGI4MnV0bS1lNjliMjJmNS02YWRlLTRkNWYtYjljNS03ODU4OWZkZjE3YjMuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.lv7K5MKXif3VEoIpamar0BPpTsoj92GqKapuHZ6BvBk" alt="Imagen tipo wallpaper de toda la saga" title="Imagen tipo wallpaper de toda la saga">
+            </div>
+            <div class="carousel__slide" id="slide-8">
+                <img src="https://images8.alphacoders.com/134/thumb-1920-1345224.jpeg" alt="Imagen promocional de Kingdom hearts 1.5 remix" title="Imagen promocional de Kingdom hearts 1.5 remix">
+            </div>
+        </div>
+    </div>
+
+    <div id="seccion-juegos">
+        <h2>TÍTULOS DE LA SAGA</h2>
+        <div class="juegos-grid">
+            <div class="juego-card">
+                <span class="anio">2002</span>
+                <h4>Kingdom Hearts</h4>
+                <p>El inicio de la saga. Sora conoce a Donald y Goofy y empieza su viaje por los mundos.</p>
+            </div>
+            <div class="juego-card">
+                <span class="anio">2004</span>
+                <h4>Chain of Memories</h4>
+                <p>Sora viaja por Castle Oblivion perdiendo sus recuerdos en una aventura de cartas.</p>
+            </div>
+            <div class="juego-card">
+                <span class="anio">2005</span>
+                <h4>Kingdom Hearts II</h4>
+                <p>Considerado por muchos la cúspide de la saga. Sora regresa para enfrentar a la Organización XIII.</p>
+            </div>
+            <div class="juego-card">
+                <span class="anio">2008</span>
+                <h4>358/2 Days</h4>
+                <p>La historia de Roxas dentro de la Organización XIII, narrada a lo largo de 358 días.</p>
+            </div>
+            <div class="juego-card">
+                <span class="anio">2010</span>
+                <h4>Birth by Sleep</h4>
+                <p>Precuela con Terra, Aqua y Ventus que explica los orígenes del conflicto con Xehanort.</p>
+            </div>
+            <div class="juego-card">
+                <span class="anio">2012</span>
+                <h4>Dream Drop Distance</h4>
+                <p>Sora y Riku se someten al Mark of Mastery Exam viajando por mundos dormidos.</p>
+            </div>
+            <div class="juego-card">
+                <span class="anio">2017</span>
+                <h4>Union χ [Cross]</h4>
+                <p>Ambientado en el pasado más lejano de la saga, explorando los orígenes de las Keyblades.</p>
+            </div>
+            <div class="juego-card">
+                <span class="anio">2019</span>
+                <h4>Kingdom Hearts III</h4>
+                <p>El desenlace definitivo de la saga Xehanort. Sora reúne a los siete guardianes de la Luz.</p>
+            </div>
+            <div class="juego-card">
+                <span class="anio">2024</span>
+                <h4>Missing-Link</h4>
+                <p>Nueva entrega para dispositivos móviles que continúa el lore de Union χ.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="pie">
+        <div>
+            <a href="https://ieskursaal.es/" target="_blank">IES Kursaal</a>
+            <span class="pie-sep">|</span>
+            <a href="https://www.square-enix.com/kingdomhearts/home/es/" target="_blank">Kingdom Hearts Oficial</a>
+        </div>
+        <span class="realizado">Jose A. Rodríguez Vera | 1º DAW Y</span>
+    </div>
+
+</div>
+</body>
+</html>
