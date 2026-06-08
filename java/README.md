@@ -1,2 +1,0 @@
-# Java
-Aqui tienes mis ejercicios brothel

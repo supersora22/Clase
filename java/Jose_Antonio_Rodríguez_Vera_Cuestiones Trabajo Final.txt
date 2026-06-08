@@ -1,0 +1,27 @@
+1. Explícame por qué en tu proyecto la “pila” del historial está hecha con
+ArrayList<String> y no con Stack, y cómo consigues igualmente el
+comportamiento LIFO al ver el historial y al deshacer.
+
+- Para guardar cada movimiento (fichajes, sanciones, creación de equipos), 
+he usado una lista que recorro y leo al revés. 
+El último elemento en entrar es el primero en salir (LIFO). 
+Esto me ha permitido crear el método deshacerAccion(), que coge el último registro y lo borra.
+El método deshacer accion simplemente toma el tamaño del array historial y le resta 1 con remove.
+así, borra la ultima acción del historial.
+y para verlo hago un bucle que lo recorre haciendo un decremento y va mostrando el valor de i en cada momento.
+
+2. En jugar(), ¿por qué primero haces colaPartidos.element() y solo más tarde
+colaPartidos.remove()? Quiero que me expliques paso a paso qué validas
+antes de sacar de verdad el partido de la cola.
+
+- element me permite añadir un partido sin borrar los anteriores, así añado los enfrentamientos al partido y los separo con split sabiendo cual es el local y el visitante.
+el colapartidos.remove salta en caso de que uno de los 2 equipos no exista (validando antes que estos tengan sus jugadores y entrenador) así compruebo que los equipos se puedan enfrentar despues de introducir ambos.
+con estos pasos verifico que todo este correcto sin borrar nada del array y básicamente elimino las comprobaciones que he ido almacenando para después crear el partido real si todo esta correcto (ha pasado todo el proceso mencionado)
+ y lo muestro por pantalla con los datos que introducimos usando los métodos específicos. 
+
+3. Explícame cómo está organizada tu matrizPuntos y qué significado tienen las
+filas y las columnas. Luego dime exactamente qué actualizas cuando se
+juega un partido.
+
+- Para guardar los puntos de la liga he usado una matriz bidimensional: private static int[][] matrizPuntos = new int[10][10];
+Las filas representan a los equipos y las columnas representan las jornadas. Al jugar un partido, el programa busca el índice del equipo local y el índice del equipo visitante, y les suma los puntos en la columna de la jornadaActiva. Esto me permite luego imprimir la clasificación y saber exactamente cuántos puntos sacó un equipo en la jornada 2 o en la 3.
